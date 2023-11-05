@@ -1,0 +1,40 @@
+import tkinter as tk
+
+def TASK():
+    task = entry.get()
+    if task:
+        task_list.insert(tk.END, task)
+        entry.delete(0, tk.END)
+
+def REMOVE():
+    selected_task_index = task_list.curselection()
+    if selected_task_index:
+        task_list.delete(selected_task_index)
+
+def UPDATE():
+    selected_task_index = task_list.curselection()
+    updated_task = entry.get()
+    if selected_task_index and updated_task:
+        task_list.delete(selected_task_index)
+        task_list.insert(selected_task_index, updated_task)
+        entry.delete(0, tk.END)
+
+root = tk.Tk()
+root.title("To-Do List Application Using Python")
+
+task_list = tk.Listbox(root, selectmode=tk.SINGLE)
+task_list.pack(pady=10)
+
+entry = tk.Entry(root)
+entry.pack(pady=10)
+
+b1 = tk.Button(root, text="Add Task", command=TASK)
+update_button = tk.Button(root, text="Update Selected Task", command=UPDATE)
+remove_button = tk.Button(root, text="Remove Selected Task", command=REMOVE)
+
+
+b1.pack()
+update_button.pack()
+remove_button.pack()
+
+root.mainloop()
